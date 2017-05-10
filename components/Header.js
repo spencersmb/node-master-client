@@ -13,8 +13,9 @@ const links = [
   { href: '/celeb-jokes', text: 'Top Secret', authRequired: true }
 ]
 
-export default connect(state => state)(({url, user}) => {
+export default connect()( ( {url, user} ) => {
   const path = url.pathname
+  console.log(user)
   return (
     <div className='appHeader'>
       <h1>Header Component</h1>

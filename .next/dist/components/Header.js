@@ -31,30 +31,29 @@ var getAllowedLink = function getAllowedLink(isAuthenticated) {
 
 var links = [{ href: '/', text: 'Home', anonymousOnly: true }, { href: '/other', text: 'Other', anonymousOnly: true }, { href: '/celeb-jokes', text: 'Top Secret', authRequired: true }];
 
-exports.default = (0, _reactRedux.connect)(function (state) {
-  return state;
-})(function (_ref) {
+exports.default = (0, _reactRedux.connect)()(function (_ref) {
   var url = _ref.url,
       user = _ref.user;
 
   var path = url.pathname;
+  console.log(user);
   return _react2.default.createElement('div', { className: 'appHeader', __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 20
     }
   }, _react2.default.createElement('h1', {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 21
     }
   }, 'Header Component'), getAllowedLink(user.isAuthenticated).map(function (link) {
     return _react2.default.createElement(_link2.default, { prefetch: true, key: link.href, href: link.href, __source: {
         fileName: _jsxFileName,
-        lineNumber: 23
+        lineNumber: 24
       }
     }, _react2.default.createElement('a', { className: path === link.href ? 'active' : '', __source: {
         fileName: _jsxFileName,
-        lineNumber: 24
+        lineNumber: 25
       }
     }, link.text));
   }));

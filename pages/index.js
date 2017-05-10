@@ -8,6 +8,7 @@ import styled, { css } from 'styled-components'
 import TodoInput from '../components/todo/todoInput'
 import { injectGlobal } from 'styled-components';
 import Page from '../components/Page'
+import PageLayout_1 from '../hocs/pageLayout_1'
 
 // const rule1 = {
 //   backgroundColor: 'blue',
@@ -88,13 +89,11 @@ class Counterfirst extends React.Component {
 
     return (
       <div>
-        <Page title='Boilerplate App' linkTo='/' {...this.props}>
-          <Div>
+         <Div>
             <Title>TodoList</Title>
-            {showTodoInput()}
-            <TodoList />
           </Div>
-        </Page>
+          {showTodoInput()}
+            <TodoList />
       </div>
     )
   }
@@ -108,6 +107,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = ({user}) => ({user})
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Counterfirst)
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(PageLayout_1(Counterfirst))
 
 

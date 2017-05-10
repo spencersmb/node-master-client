@@ -78,6 +78,10 @@ var _Page = require('../components/Page');
 
 var _Page2 = _interopRequireDefault(_Page);
 
+var _pageLayout_ = require('../hocs/pageLayout_1');
+
+var _pageLayout_2 = _interopRequireDefault(_pageLayout_);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/EveryTuesday/Documents/github/learn-node-master/client/pages/index.js?entry';
@@ -119,11 +123,11 @@ var media = (0, _keys2.default)(sizes).reduce(function (finalMedia, size) {
 
 var Div = _styledComponents2.default.div.withConfig({
   displayName: 'pages__Div',
-  componentId: 'hb3uuz-0'
+  componentId: 'bwtzhy-0'
 })(['padding-left: 20px;', ''], media.tablet(_templateObject));
 var Title = _styledComponents2.default.h1.withConfig({
   displayName: 'pages__Title',
-  componentId: 'hb3uuz-1'
+  componentId: 'bwtzhy-1'
 })(['', ''], {
   color: 'red',
   fontSize: '50px',
@@ -160,7 +164,7 @@ var Counterfirst = function (_React$Component) {
           return _react2.default.createElement(_todoInput2.default, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 85
+              lineNumber: 86
             }
           });
         }
@@ -169,14 +173,9 @@ var Counterfirst = function (_React$Component) {
       return _react2.default.createElement('div', {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 90
-        }
-      }, _react2.default.createElement(_Page2.default, (0, _extends3.default)({ title: 'Boilerplate App', linkTo: '/' }, this.props, {
-        __source: {
-          fileName: _jsxFileName,
           lineNumber: 91
         }
-      }), _react2.default.createElement(Div, {
+      }, _react2.default.createElement(Div, {
         __source: {
           fileName: _jsxFileName,
           lineNumber: 92
@@ -186,12 +185,12 @@ var Counterfirst = function (_React$Component) {
           fileName: _jsxFileName,
           lineNumber: 93
         }
-      }, 'TodoList'), showTodoInput(), _react2.default.createElement(_todoList2.default, {
+      }, 'TodoList')), showTodoInput(), _react2.default.createElement(_todoList2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 95
+          lineNumber: 96
         }
-      }))));
+      }));
     }
   }], [{
     key: 'getInitialProps',
@@ -239,4 +238,4 @@ var mapStateToProps = function mapStateToProps(_ref3) {
   return { user: user };
 };
 
-exports.default = (0, _nextReduxWrapper2.default)(_store.initStore, mapStateToProps, mapDispatchToProps)(Counterfirst);
+exports.default = (0, _nextReduxWrapper2.default)(_store.initStore, mapStateToProps, mapDispatchToProps)((0, _pageLayout_2.default)(Counterfirst));
