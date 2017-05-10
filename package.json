@@ -1,0 +1,59 @@
+{
+  "name": "nextjs-boilerplate",
+  "version": "1.0.0",
+  "scripts": {
+    "server": "node server.js",
+    "test": "mocha --reporter spec __tests__/**/*.test.js",
+    "test:watch": "npm run test -- --watch",
+    "dev": "next",
+    "build": "next build",
+    "watch": "nodemon server.js -w server.js",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "heroku-nextjs-build",
+    "lint": "standard --verbose"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "**/node_modules/**"
+    ]
+  },
+  "engines": {
+    "node": "6.9.x"
+  },
+  "cacheDirectories": [
+    "nextjs/node_modules"
+  ],
+  "dependencies": {
+    "@mars/heroku-nextjs-build": "^2.0.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^19.0.0",
+    "babel-plugin-styled-components": "^1.1.4",
+    "babel-plugin-transform-define": "^1.2.0",
+    "body-parser": "^1.17.1",
+    "colors": "^1.1.2",
+    "express": "^4.15.2",
+    "isomorphic-unfetch": "^1.0.0",
+    "next": "2.2.0",
+    "next-redux-wrapper": "^1.0.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-form": "^6.6.3",
+    "redux-thunk": "^2.1.0",
+    "styled-components": "^2.0.0-17",
+    "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "enzyme": "^2.8.2",
+    "expect": "^1.20.2",
+    "mocha": "^3.3.0",
+    "npm-run-all": "^4.0.2",
+    "standard": "^10.0.2",
+    "supertest": "^3.0.0"
+  },
+  "author": "Spencer Bigum",
+  "license": "ISC"
+}
