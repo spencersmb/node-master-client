@@ -1,5 +1,6 @@
 import actionTypes from '../actions/actionTypes'
 import initialState from './initialState'
+
 export const todosReducer = (state = initialState.todos, action) => {
   
   switch (action.type) {

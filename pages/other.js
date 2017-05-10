@@ -1,7 +1,6 @@
 import React from 'react'
 import { initStore } from '../store'
 import withRedux from 'next-redux-wrapper'
-import defaultPage from '../hocs/defaultPage'
 import Page from '../components/Page'
 
 class Counter extends React.Component {
