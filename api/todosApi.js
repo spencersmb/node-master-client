@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import env from '../env-config'
+import env from '../config/env-config'
 import fetch from 'isomorphic-unfetch'
 
 class TodosApi {
