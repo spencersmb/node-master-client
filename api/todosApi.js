@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-/* global BACKEND_URL */
+import env from '../env-config'
 import fetch from 'isomorphic-unfetch'
 
 class TodosApi {
@@ -8,7 +8,7 @@ class TodosApi {
     // since this always happens on the server I can just get the jwt from localhost
     const token = getTokenFromLocalStorage();
     return new Promise((resolve, reject) => {
-      fetch(`${api}/todos`, {
+      fetch(`${env.BACKEND_URL}/todos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ class TodosApi {
   }
   static getTodos () {
     return new Promise((resolve, reject) => {
-      fetch(`${BACKEND_URL}/todos`, {
+      fetch(`${env.BACKEND_URL}/todos`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ class TodosApi {
   static getJokes (access) {
     return new Promise((resolve, reject) => {
       
-      fetch(`${BACKEND_URL}/api/jokes/celebrity`, {
+      fetch(`${env.BACKEND_URL}/BACKEND_URL/jokes/celebrity`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${access.token}`
