@@ -15,11 +15,11 @@ var _reduxDevtoolsExtension = require('redux-devtools-extension');
 
 var _todosReducer = require('./reducers/todosReducer');
 
-var _authReducer = require('./reducers/authReducer');
-
 var _jokesReducer = require('./reducers/jokesReducer');
 
 var _reduxForm = require('redux-form');
+
+var _authReducer = require('./reducers/authReducer');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -20,7 +20,7 @@ var _createClass2 = require('babel-runtime/helpers/createClass');
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _envConfig = require('../env-config');
+var _envConfig = require('../config/env-config');
 
 var _envConfig2 = _interopRequireDefault(_envConfig);
 

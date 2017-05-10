@@ -3,7 +3,8 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { todosReducer } from './reducers/todosReducer'
 import { jokesReducer } from './reducers/jokesReducer'
-import { reducer as formReducer } from 'redux-form';
+import { reducer as formReducer } from 'redux-form'
+import { authReducer } from './reducers/authReducer'
 
 
 export const initStore = (initialState = {}) => {
