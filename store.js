@@ -6,20 +6,18 @@ import { jokesReducer } from './reducers/jokesReducer'
 import { reducer as formReducer } from 'redux-form'
 import { authReducer } from './reducers/authReducer'
 
-
 export const initStore = (initialState = {}) => {
-    // mirror of state from original app
+  // mirror of state from original app
   const reducers = combineReducers({
     todos: todosReducer,
-    user: authReducer,  
+    user: authReducer,
     jokes: jokesReducer,
     form: formReducer
   })
 
-  
   let env = process.env.NODE_ENV || 'development'
 
-  if (typeof window !== 'undefined' && env === 'development' ) {
+  if (typeof window !== 'undefined' && env === 'development') {
     // const composeEnhancers = composeWithDevTools({
     //   // Specify here name, actionsBlacklist, actionsCreators and other options if needed
     //   actionsBlacklist: ['TICK']
@@ -28,9 +26,7 @@ export const initStore = (initialState = {}) => {
     return createStore(
       reducers,
       initialState,
-      composeWithDevTools(
-        applyMiddleware(thunkMiddleware)
-      )
+      composeWithDevTools(applyMiddleware(thunkMiddleware))
     )
   }
 

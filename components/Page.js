@@ -14,7 +14,6 @@ export default connect()( props => {
   const {title} = props
   return (
     <div>
-      <Header {...props}/>
       <Other>{title}</Other>
       {props.children}
     </div>

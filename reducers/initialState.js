@@ -8,7 +8,8 @@ export default {
     }
   ],
   jokes: [],
-  user:{
+  user: {
     isAuthenticated: false
-  }
+  },
+  stores: []
 }

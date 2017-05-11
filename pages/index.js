@@ -6,9 +6,8 @@ import withRedux from 'next-redux-wrapper'
 import TodoList from '../components/todo/todoList'
 import styled, { css } from 'styled-components'
 import TodoInput from '../components/todo/todoInput'
-import { injectGlobal } from 'styled-components';
-import Page from '../components/Page'
-import PageLayout_1 from '../hocs/pageLayout_1'
+import standardLayout from '../hocs/standardLayout'
+import Link from 'next/link'
 
 // const rule1 = {
 //   backgroundColor: 'blue',
@@ -19,15 +18,14 @@ import PageLayout_1 from '../hocs/pageLayout_1'
 // const Comp = styled.div`
 //     ${rule1}
 //     `
-// const Title = styled.h1`
-//   color: red;
-//   font-size: 50px;
+const Title = styled.h1`
+  color: red;
+  font-size: 50px;
 
-//   > a{
-//     font-size:18px;
-//   }
-// `
-
+  > a{
+    font-size:18px;
+  }
+`
 
 const sizes = {
   phone: 378,
@@ -36,11 +34,10 @@ const sizes = {
   giant: 1170
 }
 
-const media = Object.keys(sizes).reduce( (finalMedia, size) => {
-
+const media = Object.keys(sizes).reduce((finalMedia, size) => {
   return {
     ...finalMedia,
-    [size]: function(...args) {
+    [size]: function (...args) {
       return css`
         @media(max-width: ${sizes[size]}px) {
           ${css(...args)}
@@ -48,65 +45,60 @@ const media = Object.keys(sizes).reduce( (finalMedia, size) => {
       `
     }
   }
-
-}, {} )
+}, {})
 
 const Div = styled.div`
   padding-left: 20px;
+
   ${media.tablet`
     padding-left: 30px;
   `}
+  
 `
-const Title = styled.h1`${{
-  color: 'red',
-  fontSize: '50px',
-  fontFamily: 'Open Sans',
-  '> a': {
-    fontSize: '18px'
-  }
-}}`
+//
+// const Title = styled.h1`
+//   ${{ color: "red", fontSize: "50px", fontFamily: "Open Sans", "> a": { fontSize: "18px" } }}`
+
+const pageTitle = 'Our Store'
 
 class Counterfirst extends React.Component {
-  static async getInitialProps({ store, isServer }) {
+  static async getInitialProps ({ store, isServer }) {
     await store.dispatch(getTodos())
     return { isServer }
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  render() {
-    const {isAuthenticated} = this.props.user
+  render () {
+    const { isAuthenticated } = this.props.user
 
     const showTodoInput = () => {
-      if(!this.props.user.isAuthenticated){
-        return <TodoInput/>
+      if (!isAuthenticated) {
+        return <TodoInput />
       }
     }
 
     return (
       <div>
-         <Div>
-            <Title>TodoList</Title>
-          </Div>
-          {showTodoInput()}
-            <TodoList />
+        <Div>
+          <Title>TodoList</Title>
+        </Div>
+        <Link prefetch href='/other'>
+          <a className='nav__link' />
+        </Link>
+        {showTodoInput()}
+        <TodoList />
       </div>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     getTodos: bindActionCreators(getTodos, dispatch)
   }
 }
 
-const mapStateToProps = ({user}) => ({user})
+const mapStateToProps = ({ user }) => ({ user })
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(PageLayout_1(Counterfirst))
-
-
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(
+  standardLayout(Counterfirst, pageTitle)
+)

@@ -20,13 +20,10 @@ var _initialState2 = _interopRequireDefault(_initialState);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var jokesReducer = exports.jokesReducer = function jokesReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default.jokes;
-  var action = arguments[1];
-
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default.jokes;var action = arguments[1];
   switch (action.type) {
     case _actionTypes2.default.LOAD_JOKES_SUCCESS:
       return [].concat((0, _toConsumableArray3.default)(action.jokes));
     default:
-      return state;
-  }
+      return state;}
 };

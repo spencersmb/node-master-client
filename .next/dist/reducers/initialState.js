@@ -8,10 +8,10 @@ exports.default = {
   light: false,
   count: 0,
   todos: [{
-    text: 'initial state todo'
-  }],
+    text: 'initial state todo' }],
+
   jokes: [],
   user: {
-    isAuthenticated: false
-  }
-};
+    isAuthenticated: false },
+
+  stores: [] };

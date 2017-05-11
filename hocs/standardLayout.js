@@ -2,13 +2,15 @@ import React from 'react'
 import Router from 'next/router'
 import Header from '../components/Header'
 import { connect } from 'react-redux'
+import Head from 'next/head'
+import env from '../config/envConfig'
 
-export default (Page) => {
-  class PageLayout_1 extends React.Component {
+export default (Page, title = '') => {
+  class standardLayout extends React.Component {
     static async getInitialProps (ctx) {
-
       // send props to the parent > child container
-      const pageProps = await Page.getInitialProps && await Page.getInitialProps(ctx)
+      const pageProps =
+        (await Page.getInitialProps) && (await Page.getInitialProps(ctx))
 
       return {
         ...pageProps,
@@ -38,11 +40,14 @@ export default (Page) => {
     render () {
       return (
         <div>
+          <Head>
+            <title>{title} | {env.WEBSITE_TITLE}</title>
+          </Head>
           <Header {...this.props} />
           <Page {...this.props} />
         </div>
       )
     }
   }
-  return connect()(PageLayout_1)
+  return connect()(standardLayout)
 }

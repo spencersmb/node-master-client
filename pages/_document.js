@@ -2,6 +2,7 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import withRedux from 'next-redux-wrapper'
 import { initStore } from '../store'
 import { ServerStyleSheet } from 'styled-components'
+import env from '../config/envConfig'
 
 class MyDocument extends Document {
   render () {
@@ -12,9 +13,11 @@ class MyDocument extends Document {
     return (
       <html>
         <Head>
+          <link rel="shortcut icon" type="image/png" href="./static/images/icons/doughnut.png"></link>
           <link async href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'></link>
-          <title>My page</title>
+          <title>{env.WEBSITE_TITLE}</title>
           {styleTags}
+          <link rel="stylesheet" href="./static/styles.css"/>
         </Head>
         <body>
           {main}

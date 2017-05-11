@@ -25,14 +25,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var initStore = exports.initStore = function initStore() {
   var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
   // mirror of state from original app
   var reducers = (0, _redux.combineReducers)({
     todos: _todosReducer.todosReducer,
     user: _authReducer.authReducer,
     jokes: _jokesReducer.jokesReducer,
-    form: _reduxForm.reducer
-  });
+    form: _reduxForm.reducer });
 
   var env = process.env.NODE_ENV || 'development';
 

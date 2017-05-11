@@ -24,25 +24,23 @@ var _initialState2 = _interopRequireDefault(_initialState);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var authReducer = exports.authReducer = function authReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default.user;
-  var action = arguments[1];
-
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default.user;var action = arguments[1];
   switch (action.type) {
     case _actionTypes2.default.TOGGLE_LOGIN:
       return (0, _assign2.default)({}, state, {
-        isAuthenticated: !state.isAuthenticated
-      });
+        isAuthenticated: !state.isAuthenticated });
+
     case _actionTypes2.default.LOGIN_SUCCESS:
       return (0, _assign2.default)({}, state, (0, _extends3.default)({}, action.user, {
-        isAuthenticated: true
-      }));
+        isAuthenticated: true }));
+
     case _actionTypes2.default.REFRESH_USER:
       return (0, _assign2.default)({}, state, (0, _extends3.default)({}, action.user));
+
     case _actionTypes2.default.LOG_OUT:
       return (0, _assign2.default)({}, state, {
-        isAuthenticated: false
-      });
+        isAuthenticated: false });
+
     default:
-      return state;
-  }
+      return state;}
 };
