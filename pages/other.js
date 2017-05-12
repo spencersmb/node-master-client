@@ -9,7 +9,9 @@ class Counter extends React.Component {
     return { isServer }
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    console.log('componentdidmput')
+  }
 
   render () {
     return <Page title='Other Page' linkTo='/' {...this.props} />

@@ -4,10 +4,11 @@ export default {
   count: 0,
   todos: [
     {
+      _id: '01',
       text: 'initial state todo'
     }
   ],
-  jokes: [],
+  isSaving: false,
   user: {
     isAuthenticated: false
   },

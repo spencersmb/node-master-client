@@ -3,11 +3,10 @@ import { bindActionCreators } from 'redux'
 import { initStore } from '../store'
 import { getTodos } from '../actions/todoActions'
 import withRedux from 'next-redux-wrapper'
-import TodoList from '../components/todo/todoList'
 import styled, { css } from 'styled-components'
-import TodoInput from '../components/todo/todoInput'
 import standardLayout from '../hocs/standardLayout'
 import Link from 'next/link'
+import StoresList from '../components/stores/storesList'
 
 // const rule1 = {
 //   backgroundColor: 'blue',
@@ -63,19 +62,11 @@ const pageTitle = 'Our Store'
 
 class Counterfirst extends React.Component {
   static async getInitialProps ({ store, isServer }) {
-    await store.dispatch(getTodos())
+    // await store.dispatch(getTodos())
     return { isServer }
   }
 
   render () {
-    const { isAuthenticated } = this.props.user
-
-    const showTodoInput = () => {
-      if (!isAuthenticated) {
-        return <TodoInput />
-      }
-    }
-
     return (
       <div>
         <Div>
@@ -84,8 +75,11 @@ class Counterfirst extends React.Component {
         <Link prefetch href='/other'>
           <a className='nav__link' />
         </Link>
-        {showTodoInput()}
-        <TodoList />
+        <Link as='/store/whole-foods' href='/store?params=whole-foods'>
+          <a>Whole Foods</a>
+        </Link>
+        <StoresList />
+
       </div>
     )
   }

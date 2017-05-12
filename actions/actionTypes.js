@@ -12,7 +12,10 @@ const actionTypes = {
 
   // current actions
   LOAD_TODOS_SUCCESS: 'LOAD_TODOS_SUCCESS',
-  SAVE_STORE: 'SAVE_STORE'
+
+  // STORE
+  SAVE_STORE: 'SAVE_STORE',
+  LOAD_STORES_SUCCESS: 'LOAD_STORES_SUCCESS'
 }
 
 export default actionTypes

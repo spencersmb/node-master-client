@@ -2,10 +2,23 @@
 import env from '../config/envConfig'
 import fetch from 'isomorphic-unfetch'
 
+const handleErrors = response => {
+  console.log(response)
+
+  if (response.status !== 200) {
+    throw Error('Unable to save store')
+  }
+  return response
+}
+
+const resolvePromiseError = (promise, reject) => {
+  promise.then(res => reject(res.message))
+}
+
 class StoreApi {
-  static getTodos () {
+  static getStores () {
     return new Promise((resolve, reject) => {
-      fetch(`${env.BACKEND_URL}/todos`, {
+      fetch(`${env.BACKEND_URL}/stores`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -13,7 +26,7 @@ class StoreApi {
       })
         .then(r => r.json())
         .then(res => {
-          resolve(res.todos)
+          resolve(res.stores)
         })
         .catch(e => {
           reject(e)
@@ -21,7 +34,6 @@ class StoreApi {
     })
   }
   static addStore (store) {
-    // since this always happens on the server I can just get the jwt from localhost
     // const token = getTokenFromLocalStorage()
     return new Promise((resolve, reject) => {
       fetch(`${env.BACKEND_URL}/add`, {
@@ -32,7 +44,29 @@ class StoreApi {
         },
         body: JSON.stringify(store)
       })
-        .then(r => r.json())
+        .then(r => {
+          let res = r.json()
+
+          // res.then(resp => {
+          //   console.log('Q')
+          //   console.log(resp.message)
+          // })
+
+          // FIRST TYPE
+          // if (r.status !== 200) {
+          //   res.then(r => {
+          //     // throw new Error(r.message)
+          //     reject(r.message)
+          //   })
+          // }
+
+          // SECOND TYPE
+          if (r.status !== 200) {
+            resolvePromiseError(res, reject)
+          }
+
+          return res
+        })
         .then(res => {
           resolve(res)
         })

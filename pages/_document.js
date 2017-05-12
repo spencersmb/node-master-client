@@ -13,11 +13,21 @@ class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <link rel="shortcut icon" type="image/png" href="./static/images/icons/doughnut.png"></link>
-          <link async href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'></link>
+          <link
+            rel='shortcut icon'
+            type='image/png'
+            href='/static/images/icons/doughnut.png'
+          />
+          <link href='/static/toastr.css' rel='stylesheet' type='text/css' />
+          <link
+            async
+            href='//fonts.googleapis.com/css?family=Open+Sans'
+            rel='stylesheet'
+            type='text/css'
+          />
           <title>{env.WEBSITE_TITLE}</title>
           {styleTags}
-          <link rel="stylesheet" href="./static/styles.css"/>
+          <link rel='stylesheet' type='text/css' href='/static/styles.css' />
         </Head>
         <body>
           {main}

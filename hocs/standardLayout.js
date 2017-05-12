@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import { connect } from 'react-redux'
 import Head from 'next/head'
 import env from '../config/envConfig'
+import ReduxToastr from 'react-redux-toastr'
 
 export default (Page, title = '') => {
   class standardLayout extends React.Component {
@@ -45,6 +46,15 @@ export default (Page, title = '') => {
           </Head>
           <Header {...this.props} />
           <Page {...this.props} />
+          <ReduxToastr
+            timeOut={4000}
+            newestOnTop={false}
+            preventDuplicates
+            position='bottom-right'
+            transitionIn='fadeIn'
+            transitionOut='fadeOut'
+            progressBar
+          />
         </div>
       )
     }

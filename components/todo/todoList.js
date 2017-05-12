@@ -2,24 +2,27 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 class TodoList extends React.Component {
-  componentDidMount () {
-
-  }
+  componentDidMount () {}
 
   render () {
-    const {todos} = this.props
+    const { todos } = this.props
+
+    const renderTodos = () => {
+      if (todos.length > 0) {
+        return todos.map(todo => <li key={todo._id}>{todo.text}</li>)
+      }
+    }
 
     return (
       <div>
         <ul>
-          {todos.map(todo => <li key={todo._id}>{todo.text}</li>)}
+          {renderTodos()}
         </ul>
       </div>
-
     )
   }
 }
 
-const mapStateToProps = ({todos}) => ({todos})
+const mapStateToProps = ({ todos }) => ({ todos })
 
 export default connect(mapStateToProps)(TodoList)
