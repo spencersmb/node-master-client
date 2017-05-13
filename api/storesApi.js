@@ -98,6 +98,35 @@ class StoreApi {
         })
     })
   }
+  static updateStore (store) {
+    // const token = getTokenFromLocalStorage()
+    return new Promise((resolve, reject) => {
+      fetch(`${env.BACKEND_URL}/update`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(store)
+      })
+        .then(r => {
+          let res = r.json()
+
+          // check for error message
+          if (r.status !== 200) {
+            resolvePromiseError(res, reject)
+          }
+
+          return res
+        })
+        .then(res => {
+          resolve(res)
+        })
+        .catch(e => {
+          reject(e)
+        })
+    })
+  }
 }
 
 export default StoreApi

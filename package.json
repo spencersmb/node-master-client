@@ -38,6 +38,7 @@
     "next-redux-wrapper": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-dropzone": "^3.13.1",
     "react-redux": "^5.0.1",
     "react-redux-toastr": "^6.2.6",
     "redux": "^3.6.0",

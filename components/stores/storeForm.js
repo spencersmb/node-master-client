@@ -1,7 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, reset } from 'redux-form'
-import { loadForm, resetForm, addStore } from '../../actions/storesActions'
+import {
+  loadForm,
+  resetForm,
+  addStore,
+  updateStore
+} from '../../actions/storesActions'
 import checkBox from '../../components/inputs/checkbox'
 import renderField from '../../components/inputs/renderField'
 import env from '../../config/envConfig'
@@ -17,6 +22,7 @@ class InitializeFromStateForm extends React.Component {
     }
   }
 
+  // Set editing state before component mounts
   componentWillMount () {
     // Set local editing state
     if (this.props.selectedStore !== undefined) {
@@ -30,6 +36,7 @@ class InitializeFromStateForm extends React.Component {
     }
   }
 
+  //update data as soon as it mounts
   componentDidMount () {
     if (this.state.editing) {
       this.props.load(this.props.selectedStore)
@@ -40,10 +47,17 @@ class InitializeFromStateForm extends React.Component {
   }
 
   handleFormSubmit (formProps) {
-    console.log(formProps)
-    console.log(this.state)
-
     if (this.state.editing) {
+      this.props
+        .updateStore(formProps)
+        .then(r => {
+          toastr.success('Saved', 'Store Update Successfully!')
+          // this.props.load(r.store)
+          // Router.push(`/store/details?params=${r.slug}`, `/store/${r.slug}`)
+        })
+        .catch(e => {
+          toastr.error('Error:', e)
+        })
     } else {
       this.props
         .addStore(formProps)
@@ -135,7 +149,7 @@ export default connect(
   }),
   {
     load: loadForm,
-    resetForm: resetForm,
+    updateStore: updateStore,
     reset: reset,
     addStore: addStore
   } // bind account loading action creator

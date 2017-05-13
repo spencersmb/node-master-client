@@ -1,11 +1,12 @@
-// const express = require('express')
+const express = require('express')
+// const compression = require('compression');
 const next = require('next')
 const { createServer } = require('http')
 const routes = require('./routes')
 const { parse } = require('url')
 const { join } = require('path')
 // const fs = require('fs')
-// const bodyParser = require('body-parser') // turns the body into json object
+const bodyParser = require('body-parser') // turns the body into json object
 // const colors = require('colors')
 // ENV SETUP
 const dev = process.env.NODE_ENV !== 'production'
@@ -14,7 +15,7 @@ const handler = routes.getRequestHandler(app)
 const handle = app.getRequestHandler()
 const port = process.env.PORT || 3000
 // const handle = app.getRequestHandler()
-// const expressServer = express()
+const expressServer = express()
 
 /*
 
@@ -47,59 +48,49 @@ Start APP WITH STATIC FILES
 Start APP
 
 */
-app.prepare().then(() => {
-  createServer(handler).listen(port, err => {
-    if (err) throw err
-    console.log('> Ready on: ' + port)
-  })
-})
+// app.prepare().then(() => {
+//   createServer(handler).listen(port, err => {
+//     if (err) throw err
+//     console.log('> Ready on: ' + port)
+//   })
+// })
 
 /*
 
 Original Setup with express
 
 */
-// app.prepare().then(() => {
-//   // allows us to send json to our express app
-//   expressServer.use(bodyParser.json())
+app.prepare().then(() => {
+  // allows us to send json to our express app
+  expressServer.use(bodyParser.json())
 
-//   // Potentailly get USER on every render her before using getInitialProps? with Middlewear
+  // NEXT ROUTE EXAMPLE BELOW
+  // page path in app is: /pages/store
+  // filename is: edit.js
+  // routes.add('edit', '/store/:id/edit', 'store/edit')
+  expressServer.get('/store/:id/edit', (req, res) => {
+    req.query = {
+      id: req.params.id
+    }
 
-//   expressServer.get('/other', (req, res) => {
-//     // console.log(serverLock.getBaseUrl(req));
+    return app.render(req, res, '/store/edit', req.query)
+  })
 
-//     req.query = {
-//       text: 'spencer'
-//     }
+  // routes.add('details', '/store/:slug', 'store/details')
+  expressServer.get('/store/:slug', (req, res) => {
+    req.query = {
+      slug: req.params.slug
+    }
 
-//     console.log(req.query)
-//     return app.render(req, res, '/other', req.query)
-//   })
+    return app.render(req, res, '/store/details', req.query)
+  })
 
-//   expressServer.get('/store/:id', (req, res) => {
-//     const actualPage = '/store'
-//     const queryParams = { id: req.params.id }
-//     console.log(actualPage)
-//     console.log(queryParams)
+  expressServer.get('*', (req, res) => {
+    return handle(req, res)
+  })
 
-//     app.render(req, res, actualPage, queryParams)
-//   })
-
-//   expressServer.get('/', (req, res) => {
-//     // console.log('SECURE'.red);
-//     // console.log(JSON.stringify(req.secure, null, 2));
-//     // console.log('headers'.red);
-//     // console.log(JSON.stringify(req.headers, null, 2));
-
-//     return app.render(req, res, '/', req.query)
-//   })
-
-//   expressServer.get('*', (req, res) => {
-//     return handle(req, res)
-//   })
-
-//   expressServer.listen(port, err => {
-//     if (err) throw err
-//     console.log('> Ready on: ' + port)
-//   })
-// })
+  expressServer.listen(port, err => {
+    if (err) throw err
+    console.log('> Ready on: ' + port + ' using express')
+  })
+})

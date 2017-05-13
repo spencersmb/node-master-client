@@ -13,6 +13,7 @@ export const getStores = () => (dispatch, getState) => {
 
   return StoreApi.getStores()
     .then(stores => {
+      console.log('store api call')
       dispatch(loadStoresSuccess(stores))
     })
     .catch(e => {})
@@ -39,9 +40,36 @@ export const addStore = store => dispatch => {
     })
 }
 
+export const updateStore = store => dispatch => {
+  console.log('Dispatch Update')
+
+  return StoreApi.updateStore(store)
+    .then(res => {
+      /*
+        On sucess dispatch call
+      */
+      dispatch(updateStoreSuccess(res))
+      return res
+    })
+    .catch(err => {
+      // SET 1
+      // toastr.error('Error:', err)
+
+      // SET 2
+      throw err
+    })
+}
+
 export const saveStore = store => {
   return {
     type: actionTypes.SAVE_STORE,
+    store
+  }
+}
+
+export const updateStoreSuccess = store => {
+  return {
+    type: actionTypes.UPDATE_STORE_DATA,
     store
   }
 }
@@ -53,9 +81,6 @@ export const loadStoresSuccess = stores => {
   }
 }
 
-/**
- * Simulates data loaded into this reducer from somewhere
- */
 export const loadForm = store => {
   return {
     type: actionTypes.LOAD_STORE_DATA,

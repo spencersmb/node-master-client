@@ -7,6 +7,16 @@ export const storeReducer = (state = initialState.stores, action) => {
       return [...state, action.store]
     case actionTypes.LOAD_STORES_SUCCESS:
       return [...action.stores]
+    case actionTypes.UPDATE_STORE_DATA:
+      const newState = state.map(store => {
+        if (store.id === action.store.id) {
+          store = { ...action.store.store }
+        }
+        return store
+      })
+      console.log(newState)
+
+      return state
 
     default:
       return state
