@@ -7,16 +7,20 @@ export const getStoreById = (stores, storeId) => {
 }
 
 export const updateTagsForEditing = store => {
-  const oldTagsArray = store.tags
-  const tagObject = {}
+  if (store === undefined) {
+    return {}
+  }
 
+  const storeObj = store[0]
+  const oldTagsArray = storeObj.tags
+
+  const tagObject = {}
   oldTagsArray.forEach(tag => {
     const obj = {}
     obj[tag] = true
     _.merge(tagObject, obj)
   })
-
-  return Object.assign({}, store, {
+  return Object.assign({}, storeObj, {
     tags: tagObject
   })
 }

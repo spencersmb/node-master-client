@@ -3,7 +3,14 @@ import StoreApi from '../api/storesApi'
 // import { toastr } from 'react-redux-toastr'
 // import Router from 'next/router'
 
-export const getStores = () => dispatch => {
+export const getStores = () => (dispatch, getState) => {
+  const state = getState()
+  if (state.stores.length > 0) {
+    console.log('stores cached')
+    dispatch(loadStoresSuccess(state.stores))
+    return
+  }
+
   return StoreApi.getStores()
     .then(stores => {
       dispatch(loadStoresSuccess(stores))

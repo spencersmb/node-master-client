@@ -17,17 +17,24 @@ class InitializeFromStateForm extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentWillMount () {
     // Set local editing state
     if (this.props.selectedStore !== undefined) {
       console.log('load editStore')
 
       this.setState({ editing: true })
-      this.props.load(this.props.selectedStore)
     } else {
       // reset form
       console.log('reset')
       this.setState({ editing: false })
+    }
+  }
+
+  componentDidMount () {
+    if (this.state.editing) {
+      this.props.load(this.props.selectedStore)
+    } else {
+      // reset form
       this.props.load({})
     }
   }
