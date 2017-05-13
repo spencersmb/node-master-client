@@ -45,3 +45,13 @@ export const loadStoresSuccess = stores => {
     stores
   }
 }
+
+/**
+ * Simulates data loaded into this reducer from somewhere
+ */
+export const loadForm = store => {
+  return {
+    type: actionTypes.LOAD_STORE_DATA,
+    store
+  }
+}

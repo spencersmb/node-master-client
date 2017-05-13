@@ -6,6 +6,7 @@ import { storeReducer } from './reducers/storeReducer'
 import { reducer as formReducer } from 'redux-form'
 import { authReducer } from './reducers/authReducer'
 import { reducer as toastrReducer } from 'react-redux-toastr'
+import { editStoreReducer } from './reducers/editStoreReducer'
 
 export const initStore = (initialState = {}) => {
   // mirror of state from original app
@@ -14,6 +15,7 @@ export const initStore = (initialState = {}) => {
     user: authReducer,
     stores: storeReducer,
     form: formReducer,
+    editingStore: editStoreReducer,
     toastr: toastrReducer
   })
 

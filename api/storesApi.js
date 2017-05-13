@@ -1,7 +1,13 @@
 /* eslint-disable no-unused-vars */
 import env from '../config/envConfig'
 import fetch from 'isomorphic-unfetch'
+// `const res = await fetch('random-site')`
 
+// [4:37]
+// `const json = await res.json()`
+
+// [4:37]
+// `return json`
 const handleErrors = response => {
   console.log(response)
 
@@ -16,6 +22,23 @@ const resolvePromiseError = (promise, reject) => {
 }
 
 class StoreApi {
+  static getStore (id) {
+    return new Promise((resolve, reject) => {
+      fetch(`${env.BACKEND_URL}/store/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(r => r.json())
+        .then(res => {
+          resolve(res.store)
+        })
+        .catch(e => {
+          reject(e)
+        })
+    })
+  }
   static getStores () {
     return new Promise((resolve, reject) => {
       fetch(`${env.BACKEND_URL}/stores`, {

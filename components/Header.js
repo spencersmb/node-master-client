@@ -8,7 +8,6 @@ import { renderSvg } from '../config/svgs'
 // import styled from 'styled-components'
 
 // File links array based on if user is authenticated
-
 const getLinks = () => {
   return env.LINKS.map(link => {
     return (

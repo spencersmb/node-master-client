@@ -12,5 +12,6 @@ export default {
   user: {
     isAuthenticated: false
   },
-  stores: []
+  stores: [],
+  editingStore: {}
 }
