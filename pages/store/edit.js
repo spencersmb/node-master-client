@@ -3,7 +3,7 @@ import { initStore } from '../../store'
 import withRedux from 'next-redux-wrapper'
 import standardLayout from '../../hocs/standardLayout'
 import InitializeFromStateForm from '../../components/stores/storeForm'
-import { getStoreById, updateTagsForEditing } from '../../utils/storeHelpers'
+import { getStoreById, convertTagsToObject } from '../../utils/storeHelpers'
 import { getStores } from '../../actions/storesActions'
 
 class editStoreForm extends React.Component {
@@ -14,10 +14,14 @@ class editStoreForm extends React.Component {
     // Get storeID
     const storeId = query.id
     const stores = store.getState().stores
+    console.log(stores)
 
     // // Get store
     const data = await getStoreById(stores, storeId)
-    const selectedStore = updateTagsForEditing(data)
+
+    const selectedStore = convertTagsToObject(data)
+    console.log('getInitialProps in edit store')
+    console.log(selectedStore)
 
     return { selectedStore }
   }

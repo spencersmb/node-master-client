@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import env from '../config/envConfig'
 import fetch from 'isomorphic-unfetch'
+import FormData from 'form-data'
 // `const res = await fetch('random-site')`
 
 // [4:37]
@@ -57,15 +58,29 @@ class StoreApi {
     })
   }
   static addStore (store) {
-    // const token = getTokenFromLocalStorage()
+    const formData = new FormData()
+
+    for (const key in store) {
+      if (key === 'photo') {
+        formData.append(key, store[key][0])
+      } else if (key === 'tags' && store['tags'].length > 0) {
+        console.log('found key tags')
+        store.tags.forEach(tag => {
+          formData.append(key, tag)
+        })
+      } else {
+        formData.append(key, store[key])
+      }
+    }
+
     return new Promise((resolve, reject) => {
       fetch(`${env.BACKEND_URL}/add`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-          // Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(store)
+        // headers: {
+        //   'Content-Type': 'application/json'
+        //   // Authorization: `Bearer ${token}`
+        // },
+        body: formData
       })
         .then(r => {
           let res = r.json()
@@ -99,15 +114,34 @@ class StoreApi {
     })
   }
   static updateStore (store) {
+    console.log('storeupdate api')
+    console.log(store)
+    console.log(store['tags'] > 0)
+
+    const formData = new FormData()
+
+    for (const key in store) {
+      if (key === 'photo' && typeof store[key] !== 'string') {
+        formData.append(key, store[key][0])
+      } else if (key === 'tags' && store['tags'].length > 0) {
+        console.log('found key tags')
+        store.tags.forEach(tag => {
+          formData.append(key, tag)
+        })
+      } else {
+        formData.append(key, store[key])
+      }
+    }
+
     // const token = getTokenFromLocalStorage()
     return new Promise((resolve, reject) => {
       fetch(`${env.BACKEND_URL}/update`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-          // Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(store)
+        // headers: {
+        //   'Content-Type': 'application/json'
+        //   // Authorization: `Bearer ${token}`
+        // },
+        body: formData
       })
         .then(r => {
           let res = r.json()

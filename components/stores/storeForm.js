@@ -1,21 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, reset } from 'redux-form'
-import {
-  loadForm,
-  resetForm,
-  addStore,
-  updateStore
-} from '../../actions/storesActions'
+import renderDropzoneInput from '../inputs/fileInput'
+import { loadForm, addStore, updateStore } from '../../actions/storesActions'
 import checkBox from '../../components/inputs/checkbox'
 import renderField from '../../components/inputs/renderField'
 import env from '../../config/envConfig'
 import { toastr } from 'react-redux-toastr'
 import Router from 'next/router'
+import { convertTagsToArray } from '../../utils/storeHelpers'
 
 class InitializeFromStateForm extends React.Component {
   constructor (props, context) {
     super(props, context)
+    console.log(props)
+
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.state = {
       editing: false
@@ -39,7 +38,19 @@ class InitializeFromStateForm extends React.Component {
   //update data as soon as it mounts
   componentDidMount () {
     if (this.state.editing) {
-      this.props.load(this.props.selectedStore)
+      // modify store props to work with Redux form
+      if (this.props.selectedStore.photo !== undefined) {
+        const updatedImage = this.props.selectedStore
+        updatedImage.photo = [
+          {
+            preview: this.props.selectedStore.photo,
+            type: 'image/jpg'
+          }
+        ]
+        this.props.load(updatedImage)
+      } else {
+        this.props.load(this.props.selectedStore)
+      }
     } else {
       // reset form
       this.props.load({})
@@ -47,9 +58,23 @@ class InitializeFromStateForm extends React.Component {
   }
 
   handleFormSubmit (formProps) {
+    //Convert Tags Object to array
+    let storeWithTagsArray = convertTagsToArray(formProps)
+    // const preview = this.props.selectedStore.photo[0].preview
+    // check for image is preivew or not
+
+    if (
+      storeWithTagsArray.photo !== undefined &&
+      !storeWithTagsArray.photo[0].name
+    ) {
+      console.log('no image updated')
+
+      // this.props.selectedStore.photo = preview
+      storeWithTagsArray.photo = this.props.selectedStore.photo[0].preview
+    }
     if (this.state.editing) {
       this.props
-        .updateStore(formProps)
+        .updateStore(storeWithTagsArray)
         .then(r => {
           toastr.success('Saved', 'Store Update Successfully!')
           // this.props.load(r.store)
@@ -60,7 +85,7 @@ class InitializeFromStateForm extends React.Component {
         })
     } else {
       this.props
-        .addStore(formProps)
+        .addStore(storeWithTagsArray)
         .then(r => {
           toastr.success('Saved', 'Store Saved Successfully!')
           Router.push(`/store/details?params=${r.slug}`, `/store/${r.slug}`)
@@ -83,6 +108,18 @@ class InitializeFromStateForm extends React.Component {
       selectedStore
     } = this.props
 
+    const loginErrorText = () => {
+      if (errorMessage !== undefined) {
+        return (
+          <div className='bs-callout bs-callout-danger'>
+            <h4>
+              {errorMessage}
+            </h4>
+          </div>
+        )
+      }
+    }
+
     return (
       <div>
         <h2>{this.state.editing ? 'Edit Store' : 'Add Store'}</h2>
@@ -99,6 +136,12 @@ class InitializeFromStateForm extends React.Component {
           />
           <label htmlFor='description'>Description</label>
           <Field name='description' component='textarea' label='Description:' />
+          <label htmlFor='photo'>Upload Photo</label>
+          <Field
+            name='photo'
+            preview={this.state.editing ? selectedStore.photo : null}
+            component={renderDropzoneInput}
+          />
           <ul className='tags'>
             {env.TAGS.map(tag => (
               <Field
@@ -112,7 +155,6 @@ class InitializeFromStateForm extends React.Component {
               />
             ))}
           </ul>
-          {/* loginErrorText() */}
           <input
             type='submit'
             className='button'
@@ -129,6 +171,11 @@ class InitializeFromStateForm extends React.Component {
 const validate = values => {
   const errors = {}
 
+  // check that its an array because we are already validating type in dropzone component
+  if (values.photo !== undefined && !Array.isArray(values.photo)) {
+    errors.photo = 'Invalid File Type'
+  }
+
   if (!values.name) {
     errors.name = 'Required'
   }
@@ -139,8 +186,8 @@ const validate = values => {
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 const storeForm = reduxForm({
   form: 'initializeFromState', // a unique identifier for this form
-  enableReinitialize: true,
-  validate
+  validate,
+  enableReinitialize: true
 })(InitializeFromStateForm)
 
 export default connect(

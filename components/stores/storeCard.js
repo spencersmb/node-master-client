@@ -13,9 +13,7 @@ import { renderSvg, svgs } from '../../config/svgs'
 export default props => {
   const { name, photo, slug, description, _id } = props
 
-  const photoUrl = photo
-    ? `/uploads/${photo}`
-    : '/static/images/photos/store.png'
+  const photoUrl = photo || '/static/images/photos/store.png'
 
   const id = _id
 

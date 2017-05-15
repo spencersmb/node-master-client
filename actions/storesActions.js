@@ -13,7 +13,7 @@ export const getStores = () => (dispatch, getState) => {
 
   return StoreApi.getStores()
     .then(stores => {
-      console.log('store api call')
+      console.log('getStore api call')
       dispatch(loadStoresSuccess(stores))
     })
     .catch(e => {})

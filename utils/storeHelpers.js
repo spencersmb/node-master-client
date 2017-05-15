@@ -6,7 +6,8 @@ export const getStoreById = (stores, storeId) => {
   }
 }
 
-export const updateTagsForEditing = store => {
+// Convert tags to Object for redux form
+export const convertTagsToObject = store => {
   if (store === undefined) {
     return {}
   }
@@ -23,4 +24,11 @@ export const updateTagsForEditing = store => {
   return Object.assign({}, storeObj, {
     tags: tagObject
   })
+}
+
+export const convertTagsToArray = store => {
+  const tags = Object.keys(store.tags)
+
+  // Convert tags to array
+  return Object.assign({}, store, { tags: tags })
 }
