@@ -15,6 +15,7 @@ export const getStores = () => (dispatch, getState) => {
     .then(stores => {
       console.log('getStore api call')
       dispatch(loadStoresSuccess(stores))
+      console.log(stores)
     })
     .catch(e => {})
 }

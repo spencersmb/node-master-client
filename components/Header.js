@@ -30,9 +30,11 @@ export default connect()(({ url, user }) => {
       <nav className='nav'>
         <div className='nav__section nav__section--pages'>
           <li className='nav__item'>
-            <a className='nav__link nav__link--logo' href='/'>
-              {renderSvg(env.LOGO)}
-            </a>
+            <Link prefetch href='/'>
+              <a className='nav__link nav__link--logo'>
+                {renderSvg(env.LOGO)}
+              </a>
+            </Link>
           </li>
           {getLinks()}
         </div>

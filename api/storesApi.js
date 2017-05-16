@@ -60,6 +60,8 @@ class StoreApi {
   static addStore (store) {
     const formData = new FormData()
 
+    console.log(store)
+
     for (const key in store) {
       if (key === 'photo') {
         formData.append(key, store[key][0])

@@ -8,10 +8,7 @@ import { getStores } from '../actions/storesActions'
 class editStoreForm extends React.Component {
   static async getInitialProps ({ store, res, query }) {
     // Get storeID
-    const stores = store.getState().stores
-    if (stores.length < 1) {
-      await store.dispatch(getStores())
-    }
+    await store.dispatch(getStores())
     return { query }
   }
 

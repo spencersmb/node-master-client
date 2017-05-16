@@ -63,6 +63,7 @@ const pageTitle = 'Our Store'
 class Counterfirst extends React.Component {
   static async getInitialProps ({ store, isServer }) {
     // await store.dispatch(getTodos())
+
     return { isServer }
   }
 
@@ -91,8 +92,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const mapStateToProps = ({ user }) => ({ user })
+// const mapStateToProps = ({ user }) => ({ user })
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(
+export default withRedux(initStore, null, mapDispatchToProps)(
   standardLayout(Counterfirst, pageTitle)
 )

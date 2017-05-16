@@ -58,7 +58,7 @@ class InitializeFromStateForm extends React.Component {
   }
 
   handleFormSubmit (formProps) {
-    //Convert Tags Object to array
+    // Convert Tags Object to array
     let storeWithTagsArray = convertTagsToArray(formProps)
     // const preview = this.props.selectedStore.photo[0].preview
     // check for image is preivew or not

@@ -27,6 +27,10 @@ export const convertTagsToObject = store => {
 }
 
 export const convertTagsToArray = store => {
+  if (!store.hasOwnProperty('tags')) {
+    return store
+  }
+
   const tags = Object.keys(store.tags)
 
   // Convert tags to array
