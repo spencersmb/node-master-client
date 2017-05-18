@@ -3,7 +3,7 @@ const prod = process.env.NODE_ENV === 'production'
 
 export default {
   BACKEND_URL: prod
-    ? 'https://node-intro-api.herokuapp.com/'
+    ? 'https://node-intro-api.herokuapp.com'
     : 'http://localhost:7777',
   WEBSITE_TITLE: 'Now Thats Delicious!',
   LINKS: [
