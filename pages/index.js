@@ -5,9 +5,8 @@ import { getTodos } from '../actions/todoActions'
 import withRedux from 'next-redux-wrapper'
 import styled, { css } from 'styled-components'
 import standardLayout from '../hocs/standardLayout'
-import Link from 'next/link'
 import StoresList from '../components/stores/storesList'
-
+import { getStores } from '../actions/storesActions'
 // const rule1 = {
 //   backgroundColor: 'blue',
 //   '@media screen and (min-width: 250px)': {
@@ -62,23 +61,17 @@ const pageTitle = 'Our Store'
 
 class Counterfirst extends React.Component {
   static async getInitialProps ({ store, isServer }) {
-    // await store.dispatch(getTodos())
-
+    await store.dispatch(getStores())
     return { isServer }
   }
 
   render () {
     return (
-      <div>
+      <div className='inner'>
         <Div>
-          <Title>TodoList</Title>
+          <Title>My first Isomorphic App</Title>
         </Div>
-        <Link prefetch href='/other'>
-          <a className='nav__link' />
-        </Link>
-        <Link as='/store/whole-foods' href='/store?params=whole-foods'>
-          <a>Whole Foods</a>
-        </Link>
+
         <StoresList />
 
       </div>
