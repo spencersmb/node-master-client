@@ -60,15 +60,15 @@ class InitializeFromStateForm extends React.Component {
   handleFormSubmit (formProps) {
     // Convert Tags Object to array
     let storeWithTagsArray = convertTagsToArray(formProps)
-    // const preview = this.props.selectedStore.photo[0].preview
     // check for image is preivew or not
-
+    // and updates image url with the original string url because redux-form overwrote it on save with an empty array
+    // so we check that the photo is not undefined and look for name if they are uploadig a new image
+    // if that doesnt exist it means they have a photo already and are not updating it
+    // IN APP v2. make the photoSave its own function and own redux container like teachable, but on the same form
     if (
       storeWithTagsArray.photo !== undefined &&
       !storeWithTagsArray.photo[0].name
     ) {
-      console.log('no image updated')
-
       // this.props.selectedStore.photo = preview
       storeWithTagsArray.photo = this.props.selectedStore.photo[0].preview
     }
@@ -77,8 +77,6 @@ class InitializeFromStateForm extends React.Component {
         .updateStore(storeWithTagsArray)
         .then(r => {
           toastr.success('Saved', 'Store Update Successfully!')
-          // this.props.load(r.store)
-          // Router.push(`/store/details?params=${r.slug}`, `/store/${r.slug}`)
         })
         .catch(e => {
           toastr.error('Error:', e)
@@ -88,7 +86,7 @@ class InitializeFromStateForm extends React.Component {
         .addStore(storeWithTagsArray)
         .then(r => {
           toastr.success('Saved', 'Store Saved Successfully!')
-          Router.push(`/store/details?params=${r.slug}`, `/store/${r.slug}`)
+          Router.push(`/store/details?slug=${r.slug}`, `/store/${r.slug}`)
         })
         .catch(e => {
           toastr.error('Error:', e)
@@ -137,6 +135,7 @@ class InitializeFromStateForm extends React.Component {
           <label htmlFor='description'>Description</label>
           <Field name='description' component='textarea' label='Description:' />
           <label htmlFor='photo'>Upload Photo</label>
+          {/* pass in preview image url if in editing mode */}
           <Field
             name='photo'
             preview={this.state.editing ? selectedStore.photo : null}

@@ -21,12 +21,10 @@ class renderDropzoneInput extends React.Component {
   handleFileAccepted (accepted) {
     const [{ preview }] = accepted
     this.setState({ preview: preview })
-    console.log(accepted)
 
     this.props.input.onChange(accepted)
   }
   removeItem () {
-    console.log('remove item')
     this.setState({ preview: null })
     this.props.input.onChange([])
   }
@@ -65,49 +63,5 @@ class renderDropzoneInput extends React.Component {
     )
   }
 }
-// const renderDropzoneInput = field => {
-//   const files = field.input.value
-
-//   const handleDropRejected = (...args) => {
-//     field.input.onChange({})
-//   }
-//   const  = accepted => {
-//     const [{ preview }] = accepted
-//     console.log(preview)
-//     field.input.onChange(preview)
-//   }
-//   const removeItem = () => {
-//     console.log('remove item')
-//     field.input.onChange([])
-//   }
-
-//   return (
-//     <div>
-//       <Dropzone
-//         name={field.name}
-//         accept='image/*'
-//         onDropRejected={handleDropRejected}
-//         onDropAccepted={handleFileAccepted}
-//       >
-//         <div>
-//           Try dropping some files here, or click to select files to upload.
-//         </div>
-//       </Dropzone>
-//       {field.meta.invalid &&
-//         field.meta.error &&
-//         <span className='error'>{field.meta.error}</span>}
-//       {files &&
-//         Array.isArray(files) &&
-//         <ul>
-//           {files.map((file, i) => (
-//             <li key={i}>
-//               <img src='' alt='' />
-//               {file.name}<span onClick={removeItem}>REMOVE FILE</span>
-//             </li>
-//           ))}
-//         </ul>}
-//     </div>
-//   )
-// }
 
 export default renderDropzoneInput

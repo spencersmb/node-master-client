@@ -85,6 +85,14 @@ app.prepare().then(() => {
     return app.render(req, res, '/store/details', req.query)
   })
 
+  expressServer.get('/tags/:tag*?', (req, res) => {
+    req.query = {
+      tag: req.params.tag
+    }
+
+    return app.render(req, res, '/tags', req.query)
+  })
+
   expressServer.get('*', (req, res) => {
     return handle(req, res)
   })

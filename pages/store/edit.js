@@ -14,14 +14,12 @@ class editStoreForm extends React.Component {
     // Get storeID
     const storeId = query.id
     const stores = store.getState().stores
-    console.log(stores)
 
-    // // Get store
+    // Get store
     const data = await getStoreById(stores, storeId)
 
+    // COnvert Tag to object so redux-can init properly
     const selectedStore = convertTagsToObject(data)
-    console.log('getInitialProps in edit store')
-    console.log(selectedStore)
 
     return { selectedStore }
   }

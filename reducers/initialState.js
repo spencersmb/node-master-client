@@ -13,5 +13,9 @@ export default {
     isAuthenticated: false
   },
   stores: [],
-  editingStore: {}
+  editingStore: {},
+  filtered: {
+    tags: [],
+    stores: []
+  }
 }
