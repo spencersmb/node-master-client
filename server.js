@@ -85,6 +85,19 @@ app.prepare().then(() => {
     return app.render(req, res, '/store/details', req.query)
   })
 
+  // routes.add('login', '/login', 'auth/login')
+  expressServer.get('/login', (req, res) => {
+    return app.render(req, res, '/auth/login', req.query)
+  })
+
+  expressServer.get('/logout', (req, res) => {
+    return app.render(req, res, '/auth/logout', req.query)
+  })
+
+  expressServer.get('/register', (req, res) => {
+    return app.render(req, res, '/auth/register', req.query)
+  })
+
   expressServer.get('/tags/:tag*?', (req, res) => {
     req.query = {
       tag: req.params.tag

@@ -8,23 +8,31 @@ import { renderSvg } from '../config/svgs'
 // import styled from 'styled-components'
 
 // File links array based on if user is authenticated
-const getLinks = () => {
-  return env.LINKS.map(link => {
-    return (
-      <li key={link.slug} className='nav__item'>
-        <Link prefetch key={link.slug} href={link.slug}>
-          <a className='nav__link'>
-            {renderSvg(link.icon)}
-            <span>{link.title}</span>
-          </a>
-        </Link>
-      </li>
+// const getAllowedLink = isAuthenticated => links
+//     .filter(l => !l.authRequired || (l.authRequired && isAuthenticated))
+//     .filter(l => !isAuthenticated || (isAuthenticated && !l.anonymousOnly))
+
+// File links array based on if user is authenticated
+const getLinks = isAuthenticated => {
+  return env.LINKS
+    .filter(
+      link => !link.authRequired || (link.authRequired && isAuthenticated)
     )
-  })
+    .map(link => {
+      return (
+        <li key={link.slug} className='nav__item'>
+          <Link prefetch key={link.slug} href={link.slug}>
+            <a className='nav__link'>
+              {renderSvg(link.icon)}
+              <span>{link.title}</span>
+            </a>
+          </Link>
+        </li>
+      )
+    })
 }
 
-export default connect()(({ url, user }) => {
-  // const path = url.pathname
+export default connect(state => state)(({ url, user }) => {
   return (
     <header className='top'>
       <nav className='nav'>
@@ -36,7 +44,7 @@ export default connect()(({ url, user }) => {
               </a>
             </Link>
           </li>
-          {getLinks()}
+          {getLinks(user.isAuthenticated)}
         </div>
 
         <Search />

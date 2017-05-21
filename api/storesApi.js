@@ -38,8 +38,8 @@ class StoreApi {
       throw error.message
     }
     /* Data sent down is 2 arrays [
-      [],
-      []
+      [tags],
+      [stores]
      ]
      */
     return body

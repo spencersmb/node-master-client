@@ -4,7 +4,6 @@ import StoreApi from '../api/storesApi'
 export const getTagsList = tag => async (dispatch, getState) => {
   try {
     const data = await StoreApi.getTagList(tag)
-
     dispatch(loadTagListSuccess(data))
     return data
   } catch (e) {

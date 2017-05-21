@@ -6,6 +6,7 @@ import Top from '../static/images/icons/top.svg'
 import Add from '../static/images/icons/add.svg'
 import MapSvg from '../static/images/icons/map.svg'
 import Pencil from '../static/images/icons/pencil.svg'
+import Logout from '../static/images/icons/logout.svg'
 
 export const svgs = {
   Logo,
@@ -14,7 +15,8 @@ export const svgs = {
   Top,
   Add,
   MapSvg,
-  Pencil
+  Pencil,
+  Logout
 }
 
 export const renderSvg = Svg => <Svg />

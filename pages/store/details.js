@@ -19,8 +19,8 @@ class StorePage extends React.Component {
     */
     try {
       /* technically we should be filtering off the redux data, but right now im just
-    testing sending data down from getInitial props to populate page
-    */
+      testing sending data down from getInitial props to populate page
+      */
       post = await store.dispatch(getSingleStore(slug))
     } catch (e) {
       toastr.error('Error:', e)
@@ -61,7 +61,7 @@ class StorePage extends React.Component {
           <ul className='tags'>
             {tags.map((tag, index) => (
               <li key={tag + index} className='tag'>
-                <Link as={`/tags/${tag}`} href={`/store/tags?tag=${tag}`}>
+                <Link as={`/tags/${tag}`} href={`/tags?tag=${tag}`}>
 
                   <a className='tag__link'>
                     <span className='tag__text'>{tag}</span>

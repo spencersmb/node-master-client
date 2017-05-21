@@ -6,7 +6,6 @@ import withRedux from 'next-redux-wrapper'
 import styled, { css } from 'styled-components'
 import standardLayout from '../hocs/standardLayout'
 import StoresList from '../components/stores/storesList'
-import { getStores } from '../actions/storesActions'
 // const rule1 = {
 //   backgroundColor: 'blue',
 //   '@media screen and (min-width: 250px)': {
@@ -60,11 +59,6 @@ const Div = styled.div`
 const pageTitle = 'Our Store'
 
 class Counterfirst extends React.Component {
-  static async getInitialProps ({ store, isServer }) {
-    await store.dispatch(getStores())
-    return { isServer }
-  }
-
   render () {
     return (
       <div className='inner'>
