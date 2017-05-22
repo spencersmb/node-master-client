@@ -9,10 +9,10 @@ export const setToken = token => {
   window.localStorage.setItem('token', token)
   window.localStorage.setItem('user', JSON.stringify(jwtDecode(token)))
   // Cookie.set('jwt', token)
-  cookies.set('jwt', token, {
-    expires: 365,
-    path: 'http://localhost:3000/'
-  })
+  // cookies.set('jwt', token, {
+  //   expires: 365,
+  //   path: 'http://localhost:3000/'
+  // })
 }
 
 export const unsetToken = () => {

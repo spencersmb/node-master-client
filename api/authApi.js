@@ -10,18 +10,26 @@ class authApi {
       headers: {
         'Content-Type': 'application/json'
       },
+      mode: 'cors',
+      credentials: 'include', // Don't forget to specify this if you need cookies
       body: JSON.stringify(user)
     })
+
+    console.log('response')
+    console.log(response)
+
     const body = await response.json()
-    console.log('body from Login API')
-    console.log(body)
+
     if (response.status !== 200) {
+      console.log('error')
+
       const error = {
         message: body.message
       }
 
       throw error.message
     }
+    console.log(body)
 
     return body
   }

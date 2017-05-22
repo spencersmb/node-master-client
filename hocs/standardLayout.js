@@ -21,6 +21,11 @@ export default (Page, title = '') => {
         ? ''
         : await ctx.store.dispatch(getStores())
 
+      // console.log('make cookie set')
+
+      // ctx.res.setHeader('Set-Cookie', `githubAccessToken=test; HttpOnly`)
+      // console.log(ctx.req.cookies)
+
       // 2. log user out if no user, or set user in Redux
       // 3. this is only used to fill redux state
       // await ctx.store.dispatch(validateUserToken(loggedUser))
